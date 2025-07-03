@@ -15,10 +15,15 @@
 
     <ItemGroup>
       <PackageReference Include="bootstrap" Version="5.3.7" />
+      <PackageReference Include="MongoDbEntityFramework" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Components\Elements\PortfolioCard.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\Elements\" />
     </ItemGroup>
 
 </Project>

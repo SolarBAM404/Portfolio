@@ -14,6 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Blazorise.Bootstrap5" Version="1.7.7" />
+      <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.7.7" />
       <PackageReference Include="bootstrap" Version="5.3.7" />
       <PackageReference Include="MongoDbEntityFramework" Version="2.0.0" />
     </ItemGroup>
@@ -23,6 +25,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="C:\Users\bmaca\.nuget\packages\bootstrap\5.3.7\contentFiles\any\any\wwwroot\css">
+        <Link>wwwroot\css</Link>
+      </Folder>
       <Folder Include="Components\Elements\" />
     </ItemGroup>
 

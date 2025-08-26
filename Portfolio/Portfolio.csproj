@@ -17,18 +17,22 @@
       <PackageReference Include="Blazorise.Bootstrap5" Version="1.7.7" />
       <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.7.7" />
       <PackageReference Include="bootstrap" Version="5.3.7" />
-      <PackageReference Include="MongoDbEntityFramework" Version="2.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Components\Elements\PortfolioCard.razor" />
+      <PackageReference Include="mongodbentityframework.host" Version="2.1.4" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="C:\Users\bmaca\.nuget\packages\bootstrap\5.3.7\contentFiles\any\any\wwwroot\css">
         <Link>wwwroot\css</Link>
       </Folder>
-      <Folder Include="Components\Elements\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Components\Elements\PortfolioCollectionCard.razor" />
+      <_ContentIncludedByDefault Remove="Elements\PortfolioCollectionCard.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Components\Elements\PortfolioCollectionCard.razor" />
     </ItemGroup>
 
 </Project>

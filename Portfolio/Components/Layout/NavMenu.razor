@@ -1,29 +1,24 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Portfolio</a>
-    </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler"/>
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
+﻿@using Portfolio.Components.Pages
+<div class="bg-dark text-white">
+    <Container Padding="Padding.Is3" Background="Background.Dark">
+        <Row Gap="Gap.Is2" TextAlignment="TextAlignment.Center">
+        
+            <Column ColumnSize="ColumnSize.Is4">
+                Benjamin (Solar) Macaulay Portfolio
+            </Column>
+        
+            <Column>
+                <Link To="/">Home</Link>
+            </Column>
+        
+            <Column>
+                <Link To="/about">Portfolio</Link>
+            </Column>
+        
+            <Column>
+                <Link To="/blog">Blog</Link>
+            </Column>
+        
+        </Row>
+    </Container>    
 </div>

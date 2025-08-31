@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using Blazorise.Icons.FontAwesome
+@using Icon = Blazorise.Icon
+@inherits LayoutComponentBase
 
 <Layout>
     
@@ -10,8 +12,30 @@
         @Body
     </LayoutContent>
     
-    <LayoutFooter>
-        
+    <LayoutFooter Background="Background.Dark">
+        <Container Padding="Padding.Is3" TextColor="TextColor.Light" TextAlignment="TextAlignment.Center">
+            <Grid Columns="GridColumns.Are3" Gap="Gap.Is2" JustifyContent="JustifyContent.SpaceBetween">
+                <Column>
+                    
+                </Column>
+                <Column Flex="Flex.AlignItems.End" Style="justify-content: center" >
+                    Designed and built by Benjamin Macaulay - © 2024
+                </Column>
+                <Column>
+                    <Row Gap="Gap.Is0">
+                        <Link To="http://github.com/solarbam404" TextColor="TextColor.Light" TextDecoration="TextDecoration.None" Padding="Padding.Is1">
+                            <Blazorise.Icon Name="FontAwesomeIcons.Github"/>
+                            Github
+                        </Link>
+                        <br/>
+                        <Link To="http://linkedin.com/in/solarbam404" TextColor="TextColor.Light" TextDecoration="TextDecoration.None" Padding="Padding.Is1">
+                            <Blazorise.Icon Name="FontAwesomeIcons.Linkedin"/>
+                            LinkedIn
+                        </Link>
+                    </Row>
+                </Column>
+            </Grid>
+        </Container>
     </LayoutFooter>
     
 </Layout>

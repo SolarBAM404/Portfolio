@@ -1,13 +1,235 @@
 ﻿@page "/"
+@using Portfolio.Components.Elements
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
-<div class="p-5 w-100 d-flex justify-content-center align-items-center" style="height: 25vh; background-image: linear-gradient(45deg, #efd5ff 0%, #515ada 100%)">
-    <Heading TextAlignment="TextAlignment.Center">
-        Benjamin (Solar) Macaulay Portfolio
+<div class="p-5 w-100 d-flex justify-content-center align-items-center" style="height: 60vh; background: linear-gradient(0deg, #28285a , #212044 50%, #19182f 100%, #110e1b 150%, #000000 200%)">
+    <Heading TextAlignment="TextAlignment.Center" TextColor="TextColor.Light" Size="HeadingSize.Is1">
+        Benjamin Macaulay Portfolio
     </Heading>
 </div>
 
 <Container>
-    <
+    <Row class="my-5" id="about">
+        <Column>
+            <Heading Size="HeadingSize.Is3" Class="mb-4">About Me</Heading>
+            <Paragraph>
+                Hello, I'm Benjamin M. (AKA Solar), a software developer who loves to build creative, function and 
+                user-friendly solutions. I specialize in Java and C# development, and I'm passionate about learning new 
+                technologies and improving my skills. But my toolkit also includes Python, JavaScript, HTML/CSS, SQL, 
+                and C++, which all help me create versatile applications.
+            </Paragraph>
+            <Paragraph>
+                Recently, I've completed and graduated from my Bachelor's degree in Computer Science from the 
+                University of Derby. During which I have worked on various projects, both independently and as part of a 
+                team, which have helped me develop my problem-solving and collaboration skills. The projects ranged from
+                creating small scripts in python or C++ to VR applications in Unity using C#.
+            </Paragraph>
+            <Paragraph>
+                Outside of programming, I enjoy gaming, photography, star gazing, and exploring new technologies. 
+                I'm always looking for new challenges and opportunities to grow as a developer, so feel free to reach 
+                out if you have any interesting projects or ideas!
+            </Paragraph>
+        </Column>
+    </Row>
+    
+    <Row class="my-5" id="projects">
+        <Column class="d-flex flex-column align-items-center">
+            <Heading Size="HeadingSize.Is3" Class="mb-4">Projects</Heading>
+            <Paragraph>
+                Here are some of the projects I've worked on:
+            </Paragraph>
+            <Carousel SelectedSlide="1" Autoplay="false" Style="max-height: 40rem; max-width: 100vw">
+                <CarouselSlide Name="1">
+                    <video src="OneBlockVideo.mp4" style="max-height: 40rem; max-width: 100vw" autoplay loop></video>
+                </CarouselSlide>
+                <CarouselSlide Name="2">
+                    <Image Source="./test.jpg" Text="Keyboard image"  Style="max-height: 40rem; max-width: 100vw"/>
+                </CarouselSlide>
+                <CarouselSlide Name="3">
+                    <Image Source="./test.jpg" Text="Road image"  Style="max-height: 40rem; max-width: 100vw"/>
+                </CarouselSlide>
+            </Carousel>
+            <Button Type="ButtonType.Link" Color="Color.Primary" Width="Width.Auto" Style="margin-top: 1rem" To="/portfolio">View More....</Button>
+        </Column>
+        
+    </Row>
+    
+    <Row class="my-5" id="skills">
+        <Column>
+            <Heading Size="HeadingSize.Is3" Class="mb-4">Skills And Technologies</Heading>
+            <Heading Size="HeadingSize.Is5" Class="mb-3">Programming Languages:</Heading>
+            <Row>
+                @foreach (var lang in _programmingLanguages)
+                {
+                        @(RenderImage(lang))
+                }
+            </Row>
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Frameworks:</Heading>
+            <Row>
+                @foreach (var frame in _frameworks)
+                {
+                    @RenderImage(frame)
+                }
+            </Row>
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Databases:</Heading>
+            <Row>
+                @foreach (var db in _databases)
+                {
+                    @RenderImage(db)
+                }
+            </Row>
+            
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Version Control:</Heading>
+            <Row>
+                @foreach (var vc in _versionControl)
+                {
+                    @RenderImage(vc)
+                }
+            </Row>
+            
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Development Tools:</Heading>
+            <Row>
+                @foreach (var tool in _developmentTools)
+                {
+                    @RenderImage(tool)
+                }
+            </Row>
+            
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Libraries</Heading>
+            <Row>
+                @foreach (var skill in _libraries)
+                {
+                    @RenderImage(skill)
+                }
+            </Row>
+            
+            <Heading Size="HeadingSize.Is5" Class="mt-4 mb-3">Other Skills</Heading>
+            <Row>
+                @foreach (var skill in _otherSkills)
+                {
+                    @RenderImage(skill)
+                }
+            </Row>
+            
+        </Column>
+    </Row>
+
+    <Row class="my-5" id="contact">
+        <Column>
+            <Heading Size="HeadingSize.Is3" Class="mb-4">Contact Me</Heading>
+            <Paragraph>
+                Feel free to reach out to me for collaborations, job opportunities, or just to say hello!
+            </Paragraph>
+            <ul>
+                <li>Email: bmacaulay4843@gmail.com</li>
+            </ul>
+        </Column>
+    </Row>
 </Container>
+
+@code{
+
+    private Dictionary<string, string>[] _programmingLanguages =
+    [
+        new() { { "name", "Java" }, { "image", "java.png" }, {"level", "Advanced" } , {"url", "https://www.java.com/en/"}},
+        new() { { "name", "CSharp" }, { "image", "csharp.png" }, {"level", "Advanced" } , {"url", "https://learn.microsoft.com/en-us/dotnet/csharp/"} },
+        new() { { "name", "Python" }, { "image", "python.png" }, {"level", "Intermediate" } , {"url", "https://www.python.org/"}},
+        new() { { "name", "JavaScript" }, { "image", "javascript.png" }, {"level", "Intermediate" } , {"url", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"}},
+        new() { { "name", "TypeScript" }, { "image", "typescript.png" }, {"level", "Beginner" } , {"url", "https://www.typescriptlang.org/"}},
+        new() { { "name", "SQL" }, { "image", "sql.png" }, {"level", "Intermediate" } , {"url", "https://www.w3schools.com/sql/"}},
+        new() { { "name", "C++" }, { "image", "c++.png" }, {"level", "Beginner" } , {"url", "https://isocpp.org/"}},
+        new() { { "name", "HTML" }, { "image", "html.png" }, {"level", "Intermediate" } , {"url", "https://developer.mozilla.org/en-US/docs/Web/HTML"}},
+        new() { { "name", "CSS" }, { "image", "css.png" }, {"level", "Intermediate" } , {"url", "https://developer.mozilla.org/en-US/docs/Web/CSS"} },
+        new() { { "name", "Bash" }, { "image", "bash.png" }, {"level", "Intermediate" } , {"url", "https://www.gnu.org/software/bash/"} },
+        new() { { "name", "PowerShell" }, { "image", "powershell.png" }, {"level", "Intermediate" } , {"url", "https://learn.microsoft.com/en-us/powershell/"} },
+    ];
+    
+    private Dictionary<string, string>[] _frameworks =
+    [
+        new() { { "name", ".Net Framework Core" }, { "image", "netframework.png" }, {"level", "Intermediate" } , {"url", "https://dotnet.microsoft.com/en-us/"}},
+        new() { { "name", "ASPNET" }, { "image", "aspnet.png" }, {"level", "Intermediate" } , {"url", "https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0"}},
+        new() { { "name", "React" }, { "image", "react.png" }, {"level", "Beginner" } , {"url", "https://react.dev/"}},
+        new() { { "name", "NodeJS" }, { "image", "nodejs.png" }, {"level", "Beginner" } , {"url", "https://nodejs.org/en/"}},
+        new() { { "name", "NextJS" }, { "image", "nextjs.png" }, {"level", "Beginner" } , {"url", "https://nextjs.org/"}},
+        new() { { "name", "Blazor" }, { "image", "blazor.png" }, {"level", "Intermediate" } , {"url", "https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor"}},
+        new() { { "name", "Flask" }, { "image", "flask.png" }, {"level", "Beginner" } , {"url", "https://flask.palletsprojects.com/en/2.3.x/"}},
+        new() { { "name", "Django" }, { "image", "django.png" }, {"level", "Beginner" } , {"url", "https://www.djangoproject.com/"} }
+    ];
+    
+    private Dictionary<string, string>[] _databases =
+    [
+        new() { { "name", "MySQL" }, { "image", "mysql.png" }, {"level", "Intermediate" } , {"url", "https://www.mysql.com/"}},
+        new() { { "name", "PostgreSQL" }, { "image", "postgresql.png" }, {"level", "Intermediate" } , {"url", "https://www.postgresql.org/"}},
+        new() { { "name", "MongoDB" }, { "image", "mongodb.png" }, {"level", "Beginner" } , {"url", "https://www.mongodb.com/"}},
+        new() { { "name", "SQLite" }, { "image", "sqlite.png" }, {"level", "Beginner" } , {"url", "https://www.sqlite.org/index.html"}},
+        new() { { "name", "SQLServer" }, { "image", "sqlserver.png" }, {"level", "Beginner" } , {"url", "https://www.microsoft.com/en-us/sql-server"} }
+    ];
+    
+    private Dictionary<string, string>[] _versionControl =
+    [
+        new() { { "name", "Git" }, { "image", "git.png" }, {"level", "Intermediate" } , {"url", "https://git-scm.com/"}},
+        new() { { "name", "GitHub" }, { "image", "github.png" }, {"level", "Intermediate" } , {"url", "https://github.com"}},
+        new() { { "name", "Bitbucket" }, { "image", "bitbucket.png" }, {"level", "Beginner" } , {"url", "https://bitbucket.org/"}},
+        new() { { "name", "GitLab" }, { "image", "gitlab.png" }, {"level", "Beginner" } , {"url", "https://about.gitlab.com/"} }
+    ];
+    
+    private Dictionary<string, string>[] _developmentTools =
+    [
+        new() { { "name", "VisualStudio" }, { "image", "visualstudio.png" }, {"level", "Intermediate" } , {"url", "https://visualstudio.microsoft.com/"}},
+        new() { { "name", "Rider" }, { "image", "rider.png" }, {"level", "Beginner" } , {"url", "https://www.jetbrains.com/rider/"}},
+        new() { { "name", "IntelliJIDEA" }, { "image", "intellijidea.png" }, {"level", "Beginner" } , {"url", "https://www.jetbrains.com/idea/"}},
+        new() { { "name", "Eclipse" }, { "image", "eclipse.png" }, {"level", "Beginner" } , {"url", "https://www.eclipse.org/"}},
+        new() { { "name", "VSCode" }, { "image", "vscode.png" }, {"level", "Intermediate" } , {"url", "https://code.visualstudio.com/"}},
+        new() { { "name", "Docker" }, { "image", "docker.png" }, {"level", "Beginner" } , {"url", "https://www.docker.com/"}},
+        new() { { "name", "Jenkins" }, { "image", "jenkins.png" }, {"level", "Beginner" } , {"url", "https://www.jenkins.io/"}},
+        new() { { "name", "Gradle" }, { "image", "gradle.png" }, {"level", "Beginner" } , {"url", "https://gradle.org/"}},
+        new() { { "name", "Maven" }, { "image", "maven.png" }, {"level", "Beginner" } , {"url", "https://maven.apache.org/"}},
+        new() { { "name", "AWS" }, { "image", "aws.png" }, {"level", "Beginner" } , {"url", "https://aws.amazon.com/"}},
+        new() { { "name", "Azure" }, { "image", "azure.png" }, {"level", "Beginner" } , {"url", "https://azure.microsoft.com/en-us/"} },
+        new() { { "name", "Agile" }, { "image", "agile.png" }, {"level", "Intermediate" } , {"url", "https://www.agilealliance.org/agile101/"}},
+        new() { { "name", "RESTfulAPIs" }, { "image", "restapi.png" }, {"level", "Intermediate" } , {"url", "https://restfulapi.net/"}},
+        new() { { "name", "Postman" }, { "image", "postman.png" }, {"level", "Beginner" } , {"url", "https://www.postman.com/"} }
+    ];
+    
+    private Dictionary<string, string>[] _libraries =
+    [
+        new() { { "name", "Blazorise" }, { "image", "blazorise.png" }, {"level", "Intermediate" } , {"url", "https://blazorise.com/"}},
+        new() { { "name", "ChartJS" }, { "image", "chartjs.png" }, {"level", "Beginner" } , {"url", "https://www.chartjs.org/"}},
+        new() { { "name", "Bootstrap" }, { "image", "bootstrap.png" }, {"level", "Intermediate" } , {"url", "https://getbootstrap.com/"}},
+        new() { { "name", "TailwindCSS" }, { "image", "tailwindcss.png" }, {"level", "Beginner" } , {"url", "https://tailwindcss.com/"}},
+        new() { { "name", "MaterialUI" }, { "image", "materialui.png" }, {"level", "Beginner" } , {"url", "https://mui.com/"}},
+        new() { { "name", "JQuery" }, { "image", "jquery.png" }, {"level", "Beginner" } , {"url", "https://jquery.com/"}},
+        new() { { "name", "Hibernate" }, { "image", "hibernate.png" }, {"level", "Beginner" } , {"url", "https://hibernate.org/"}},
+        new() { { "name", "NumPy" }, { "image", "numpy.png" }, {"level", "Beginner" } , {"url", "https://numpy.org/"}},
+        new() { { "name", "Pandas" }, { "image", "pandas.png" }, {"level", "Beginner" } , {"url", "https://pandas.pydata.org/"} }
+        
+    ];
+    
+    private Dictionary<string, string>[] _otherSkills =
+    [
+        new() { { "name", "Nginx" }, { "image", "nginx.png" }, {"level", "Beginner" } , {"url", "https://www.nginx.com/"} },
+        new () { { "name", "Apache" }, { "image", "apache.png" }, {"level", "Beginner" } , {"url", "https://www.apache.org/"} },
+        new() { { "name", "Linux" }, { "image", "linux.png" }, {"level", "Intermediate" } , {"url", "https://www.linux.org/"} },
+        new() { { "name", "Unity" }, { "image", "unity.png" }, {"level", "Intermediate" } , {"url", "https://unity.com/"} },
+        new() { { "name", "Photoshop" }, { "image", "photoshop.png" }, {"level", "Intermediate" } , {"url", "https://www.adobe.com/products/photoshop.html"} },
+        new() { { "name", "AffinityPhoto" }, { "image", "affinityphoto.png" }, {"level", "Intermediate" } , {"url", "https://affinity.serif.com/en-gb/photo/"} },
+        new() { { "name", "Blender" }, { "image", "blender.png" }, {"level", "Beginner" } , {"url", "https://www.blender.org/"} }
+        
+    ];
+
+    private string getImageElement(string name)
+    {
+        return $"./icons/{name.ToLower()}.png";
+    }
+
+    private RenderFragment RenderImage(Dictionary<string, string> skill) => builder =>
+    {
+        builder.OpenComponent(0, typeof(HomeSkillComponent));
+        builder.AddAttribute(1, "Name", skill["name"]);
+        builder.AddAttribute(2, "Icon", skill["image"]);
+        builder.AddAttribute(3, "Link", skill["url"]);
+        builder.CloseComponent();
+    };
+}

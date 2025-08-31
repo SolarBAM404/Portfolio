@@ -1,0 +1,25 @@
+@using Portfolio.Models
+@namespace Portfolio.Components.Elements
+
+<Card>
+    
+    <CardImage Src="@Project.ImageUrl" Alt="@Project.Title" />
+    <CardBody>
+        <Heading Size="HeadingSize.Is3">@Project.Title</Heading>
+        @foreach (string tag in Project.Technologies)
+        {
+            <Badge Color="Color.Secondary" Margin="Margin.Is1">@tag</Badge>
+        }
+        <p>@Project.Description</p>
+    </CardBody>
+    
+</Card>
+
+@code {
+    
+    [Parameter]
+    public required PortfolioProjectModel Project { get; set; }
+    
+    
+    
+}

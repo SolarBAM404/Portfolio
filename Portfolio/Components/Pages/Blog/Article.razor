@@ -1,0 +1,34 @@
+@page "/blog/article"
+@using global::Portfolio.Data
+@using global::Portfolio.Models
+@inject PortfolioContext PortfolioContext
+
+<Card>
+    <CardBody>
+        
+        <Heading Size="HeadingSize.Is3">@_article.Title</Heading>
+        @foreach (string tag in _article.Tags)
+        {
+            <Badge Color="Color.Secondary">@tag</Badge>
+        }
+        
+    </CardBody>
+</Card>
+
+@code {
+    
+    [SupplyParameterFromQuery]
+    public required string Slug { get; set; }
+    
+    private BlogArticle? _article;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        // _article = await BlogService.GetArticleBySlugAsync(Slug);
+        if (_article == null)
+        {
+            // NavigationManager.NavigateTo("/blog");
+        }
+    }
+    
+}

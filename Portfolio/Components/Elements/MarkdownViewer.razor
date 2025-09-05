@@ -1,0 +1,9 @@
+@using Markdig
+@if (!string.IsNullOrWhiteSpace(Content))
+{
+    @((MarkupString)Markdown.ToHtml(Content))
+}
+
+@code {
+    [Parameter] public string Content { get; set; }
+}

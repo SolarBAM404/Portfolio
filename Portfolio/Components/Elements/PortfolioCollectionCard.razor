@@ -3,14 +3,19 @@
 
 <Card>
     
-    <CardImage Src="@Project.ImageUrl" Alt="@Project.Title" />
+    @if (!string.IsNullOrEmpty(Project.ImageUrl))
+    {
+        <CardImage Src="@Project.ImageUrl" Alt="@Project.Title" Style="max-height: 10vh; object-fit: cover; object-position: top"/>
+    }
+    
     <CardBody>
         <Heading Size="HeadingSize.Is3">@Project.Title</Heading>
-        @foreach (string tag in Project.Technologies)
+        <Paragraph>@Project.Summary</Paragraph>
+        @if (Project.ProjectUrl is not null)
         {
-            <Badge Color="Color.Secondary" Margin="Margin.Is1">@tag</Badge>
+            <Button Color="Color.Primary" Type="ButtonType.Link" To="@Project.ProjectUrl" Target="Target.Blank" Class="mx-2">View Project</Button>
         }
-        <p>@Project.Description</p>
+        <Button Color="Color.Secondary" Type="ButtonType.Link" To="@("/portfolio/" + Project.Slug)" Class="mx-2">View Details</Button>
     </CardBody>
     
 </Card>
@@ -18,8 +23,6 @@
 @code {
     
     [Parameter]
-    public required PortfolioProjectModel Project { get; set; }
-    
-    
+    public required PortfolioProject Project { get; set; }
     
 }

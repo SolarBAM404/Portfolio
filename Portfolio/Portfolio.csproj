@@ -14,9 +14,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Blazorise.Bootstrap5" Version="1.7.7" />
-      <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.7.7" />
-      <PackageReference Include="bootstrap" Version="5.3.7" />
+      <PackageReference Include="AspNetCore.Identity.Mongo" Version="10.1.0" />
+      <PackageReference Include="Blazorise.Bootstrap5" Version="1.8.1" />
+      <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.8.1" />
+      <PackageReference Include="Blazorise.Markdown" Version="1.8.1" />
+      <PackageReference Include="Blazorise.Video" Version="1.8.1" />
+      <PackageReference Include="bootstrap" Version="5.3.8" />
+      <PackageReference Include="Markdig" Version="0.41.3" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.8" />
       <PackageReference Include="mongodbentityframework.host" Version="2.1.4" />
     </ItemGroup>
 
@@ -24,6 +29,7 @@
       <Folder Include="C:\Users\bmaca\.nuget\packages\bootstrap\5.3.7\contentFiles\any\any\wwwroot\css">
         <Link>wwwroot\css</Link>
       </Folder>
+      <Folder Include="Components\Elements\Dashboard\" />
     </ItemGroup>
 
     <ItemGroup>

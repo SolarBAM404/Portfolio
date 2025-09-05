@@ -1,0 +1,107 @@
+@page "/portfolio/{slug}"
+@using global::Portfolio.Models
+@using Portfolio.Components.Elements
+@using Portfolio.Data
+@using Markdown = Markdig.Markdown
+@rendermode InteractiveServer
+@inject PortfolioContext PortfolioContext
+
+<Container>
+    
+    <Heading Size="HeadingSize.Is1" TextAlignment="TextAlignment.Center" Margin="Margin.Is2">@Project?.Title</Heading>
+    
+    @if (Project?.MediaUrls?.Any() == true)
+    {
+        <Carousel @bind-SelectedSlide="selectedSlide" Style="max-height: 50vh" Class="mt-3" Autoplay="true" Interval="10000">
+            @for (int i = 0; i < Project.MediaUrls.Count(); i++)
+            {
+                int slideIndex = i;
+                string mediaUrl = Project.MediaUrls[i];
+
+                <CarouselSlide Name="@slideIndex.ToString()" Style="max-height: 50vh">
+                    @if (IsImageFile(mediaUrl))
+                    {
+                        <Image Source="@mediaUrl"
+                               Width="Width.Max100"
+                               Height="Height.Max100"
+                               Display="Display.Block"
+                               Alt="@($"Project media {slideIndex + 1}")"/>
+                    }
+                    else if (IsVideoFile(mediaUrl))
+                    {
+                        <Video Source="@mediaUrl" AutoPlay/>
+                    }
+                    else
+                    {
+                        <div class="unsupported-media">
+                            <p>Unsupported media type: @Path.GetExtension(mediaUrl)</p>
+                        </div>
+                    }
+                </CarouselSlide>
+            }
+        </Carousel>
+    }
+    else
+    {
+
+    }
+
+    <MarkdownViewer Content="@_content"/>
+</Container>
+
+@code {
+    [Parameter]
+    public required string Slug { get; set; }
+
+    public PortfolioProject? Project { get; set; }
+    
+    private string selectedSlide = "0";
+    private string _content = "Loading...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try 
+        {
+            Project = await Task.Run(() => 
+                PortfolioContext.PortfolioProjects
+                    .SearchFor(x => x.Slug == Slug)
+                    .FirstOrDefault());
+
+            if (Project != null)
+            {
+                _content = Markdown.ToHtml(Project.MarkdownContent ?? "No content available.");
+                
+                // Ensure selectedSlide is valid
+                if (Project.MediaUrls?.Any() == true)
+                {
+                    selectedSlide = "0";
+                }
+            }
+            else
+            {
+                _content = "Project not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _content = "Error loading project content.";
+            // Log the exception as needed
+        }
+        
+        StateHasChanged();
+    }
+
+    private static bool IsImageFile(string url)
+    {
+        var extension = Path.GetExtension(url).ToLowerInvariant();
+        return new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp" }
+            .Contains(extension);
+    }
+
+    private static bool IsVideoFile(string url)
+    {
+        var extension = Path.GetExtension(url).ToLowerInvariant();
+        return new[] { ".mp4", ".webm", ".ogg", ".avi", ".mov", ".wmv" }
+            .Contains(extension);
+    }
+}

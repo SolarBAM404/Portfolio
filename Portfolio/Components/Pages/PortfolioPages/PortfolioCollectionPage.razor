@@ -1,0 +1,37 @@
+@page "/portfolio"
+@namespace Portfolio.Components.Elements
+@using global::Portfolio.Data
+@using global::Portfolio.Models
+@inject PortfolioContext portfolioContext
+
+<Container Class="mt-3">
+    <Row>
+        
+        <Column ColumnSize="ColumnSize.Is12">
+            <Heading Size="HeadingSize.Is3">Projects</Heading>
+            <Paragraph>
+                Listed below is the projects that I have been a part of and conducted
+            </Paragraph>
+        </Column>
+        
+        @foreach (PortfolioProject project in _projects)
+        {
+            <Column ColumnSize="ColumnSize.Is3" Style="margin-bottom: 2rem">
+                <PortfolioCollectionCard Project="project" />
+            </Column>
+        }
+        
+    </Row>
+</Container>
+
+
+@code {
+
+    private List<PortfolioProject> _projects;
+    
+    protected override void OnInitialized()
+    {
+        _projects = portfolioContext.PortfolioProjects.GetAll().ToList();
+    }
+
+}

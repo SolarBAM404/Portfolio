@@ -1,0 +1,85 @@
+@page "/account/register"
+    @using System.ComponentModel.DataAnnotations
+    @using AspNetCore.Identity.Mongo.Model
+    @using Microsoft.AspNetCore.Identity
+    @inject UserManager<MongoUser> UserManager
+    @inject NavigationManager NavigationManager
+    @rendermode InteractiveServer
+    
+    <Container>
+        <Row class="mt-4 mb-4">
+            <Column>
+                <h2>Register</h2>
+            </Column>
+            <Form @onsubmit="HandleValidSubmit" Padding="Padding.Is4">
+                <AntiforgeryToken/>
+                <Column>
+                    <Column>
+                        <Field>
+                            <FieldLabel RequiredIndicator>Email</FieldLabel>
+                            <TextEdit @bind-Text="Email" Role="TextRole.Email" autocomplete="email">
+                                <Validation>
+                                    <ValidationError/>
+                                </Validation>
+                            </TextEdit>
+                        </Field>
+                    </Column>
+                    <Column>
+                        <Field>
+                            <FieldLabel RequiredIndicator>Password</FieldLabel>
+                            <TextEdit @bind-Text="Password" Role="TextRole.Password" autocomplete="new-password">
+                                <Validation>
+                                    <ValidationError/>
+                                </Validation>
+                            </TextEdit>
+                        </Field>
+                    </Column>
+                    <Column>
+                        <Field>
+                            <FieldLabel RequiredIndicator>Confirm Password</FieldLabel>
+                            <TextEdit @bind-Text="ConfirmPassword" Role="TextRole.Password" autocomplete="new-password">
+                                <Validation>
+                                    <ValidationError/>
+                                </Validation>
+                            </TextEdit>
+                        </Field>
+                    </Column>
+                </Column>
+                <Column>
+                    <Field>
+                        <Button Type="ButtonType.Submit" Color="Color.Primary">Register</Button>
+                    </Field>
+                </Column>
+            </Form>
+        </Row>
+    </Container>
+    
+    @code {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string Email { get; set; }
+    
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    
+        [Required(ErrorMessage = "Confirm password is required")]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+    
+        private async void HandleValidSubmit()
+        {
+            var user = new MongoUser { UserName = Email, Email = Email };
+            var result = await UserManager.CreateAsync(user, Password);
+            if (result.Succeeded)
+            {
+                NavigationManager.NavigateTo("/account/login");
+            }
+            else
+            {
+                // Handle registration failure (e.g., show error message)
+                Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+            }
+        }
+    }

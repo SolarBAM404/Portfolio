@@ -5,7 +5,7 @@ public class BlogArticle : BaseModel
     public string Title { get; set; } // Title of the blog article
     public string Content { get; set; } // Content will be stored as Markdown
     public string Category { get; set; } // Category of the blog article
-    public string Tags { get; set; } // Comma-separated tags for the article
+    public string[] Tags { get; set; } // Comma-separated tags for the article
     public string Slug { get; set; } // URL-friendly version of the title
     
     public bool IsPublished { get; set; } // Indicates if the article is published

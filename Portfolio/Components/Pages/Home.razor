@@ -1,5 +1,8 @@
 ﻿@page "/"
 @using Portfolio.Components.Elements
+@using Portfolio.Data
+@using Portfolio.Models
+@inject PortfolioContext PortfolioContext
 @rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
@@ -40,17 +43,27 @@
             <Paragraph>
                 Here are some of the projects I've worked on:
             </Paragraph>
-            <Carousel SelectedSlide="1" Style="max-height: 40rem; max-width: 100vw">
-                <CarouselSlide Name="1">
-                    <video src="OneBlockVideo.mp4" style="max-height: 40rem; max-width: 100vw" autoplay loop></video>
-                </CarouselSlide>
-                <CarouselSlide Name="2">
-                    <Image Source="./test.jpg" Text="Keyboard image"  Style="max-height: 40rem; max-width: 100vw"/>
-                </CarouselSlide>
-                <CarouselSlide Name="3">
-                    <Image Source="./test.jpg" Text="Road image"  Style="max-height: 40rem; max-width: 100vw"/>
-                </CarouselSlide>
-            </Carousel>
+            <Carousel SelectedSlide="1" Style="max-height: 40rem; max-width: 100vw" Autoplay="true" Interval="15000.0">
+                @if (_carouselContents != null)
+                {
+                    int slideIndex = 0;
+                    foreach (var content in _carouselContents)
+                    {
+                        <CarouselSlide Name="@slideIndex.ToString()">
+                            @if (content.Mode == MediaMode.Video )
+                            {
+                                <Video Source="@content.Url" AutoPlay Loop Style="height: 40rem; max-width: 100vw"/>
+                            }
+                            else if (content.Mode == MediaMode.Image)
+                            {
+                                <Image Source="@content.Url" 
+                                       Style="height: 40rem; max-width: 100vw"/>
+                            }
+                        </CarouselSlide>
+                        slideIndex++;
+                    }
+                 }
+            </Carousel >
             <Button Type="ButtonType.Link" Color="Color.Primary" Width="Width.Auto" Style="margin-top: 1rem" To="/portfolio">View More....</Button>
         </Column>
         
@@ -219,6 +232,8 @@
         
     ];
 
+    private HomeCarouselContent[] _carouselContents;
+
     private string getImageElement(string name)
     {
         return $"./icons/{name.ToLower()}.png";
@@ -232,4 +247,10 @@
         builder.AddAttribute(3, "Link", skill["url"]);
         builder.CloseComponent();
     };
+
+    protected override void OnInitialized()
+    {
+        _carouselContents = PortfolioContext.HomeCarouselContents.ToArray();
+    }
+
 }

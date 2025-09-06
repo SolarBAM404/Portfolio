@@ -9,6 +9,8 @@ public class PortfolioContext : DbContext
     public DbSet<BlogArticle> BlogArticles { get; private set; }
     public DbSet<PortfolioProject> PortfolioProjects { get; private set; }
     
+    public DbSet<HomeCarouselContent> HomeCarouselContents { get; private set; }
+    
     public PortfolioContext(DbContextOptions options) : base(options)
     {
     }

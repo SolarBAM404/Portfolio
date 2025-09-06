@@ -37,7 +37,7 @@ services.AddIdentityMongoDbProvider<MongoUser>(identity =>
         identity.Password.RequiredLength = 8;
     }, mongo =>
     {
-        mongo.ConnectionString = dbSettings.ConnString + "/" + dbSettings.DatabaseName;
+        mongo.ConnectionString = dbSettings.ConnString;
     });
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims

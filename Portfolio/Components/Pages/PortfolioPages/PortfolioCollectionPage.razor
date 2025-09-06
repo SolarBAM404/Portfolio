@@ -31,7 +31,7 @@
     
     protected override void OnInitialized()
     {
-        _projects = portfolioContext.PortfolioProjects.GetAll().ToList();
+        _projects = portfolioContext.PortfolioProjects.ToList();
     }
 
 }

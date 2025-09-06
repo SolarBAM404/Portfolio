@@ -63,9 +63,7 @@
         try 
         {
             Project = await Task.Run(() => 
-                PortfolioContext.PortfolioProjects
-                    .SearchFor(x => x.Slug == Slug)
-                    .FirstOrDefault());
+                PortfolioContext.PortfolioProjects.FirstOrDefault(x => x.Slug == Slug));
 
             if (Project != null)
             {

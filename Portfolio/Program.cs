@@ -1,23 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
-using System.Text.Encodings.Web;
 using AspNetCore.Identity.Mongo;
 using AspNetCore.Identity.Mongo.Model;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
-using MongoDbEntityFramework.Host;
-using MongoDbEntityFramework.Settings;
 using Portfolio.Components;
 using Portfolio.Data;
-using _Imports = Portfolio.Components._Imports;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -74,7 +65,7 @@ services.AddAuthentication(options =>
         };
 });
 
-services.AddMongoDbContext<PortfolioContext>(dbSettings);
+services.AddMongoDB<PortfolioContext>(dbSettings.ConnString + "/" + dbSettings.DatabaseName);
 
 WebApplication app = builder.Build();
 
@@ -96,3 +87,16 @@ app.MapRazorComponents<App>()
     // .AddAdditionalAssemblies(typeof(_Imports).Assembly);
 
 app.Run();
+
+
+class DbSettings
+{
+    public string ConnString { get; set; }
+    public string DatabaseName { get; set; }
+
+    public DbSettings(string connString, string databaseName)
+    {
+        ConnString = connString;
+        DatabaseName = databaseName;
+    }
+}

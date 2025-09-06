@@ -1,11 +1,10 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDbEntityFramework.Models;
 
 namespace Portfolio.Models;
 
-public class BaseModel : IEntity
+public class BaseModel
 {
     [BsonId]
-    public ObjectId Id { get; set; }
+    public ObjectId _id { get; set; }
 }

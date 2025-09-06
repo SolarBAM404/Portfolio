@@ -40,6 +40,8 @@ services.AddIdentityMongoDbProvider<MongoUser>(identity =>
         mongo.ConnectionString = dbSettings.ConnString;
     });
 
+services.AddMongoDB<PortfolioContext>(dbSettings.ConnString);
+
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
 services.AddAuthentication(options =>
 {
@@ -64,8 +66,6 @@ services.AddAuthentication(options =>
             ClockSkew = TimeSpan.Zero // remove delay of token when expire
         };
 });
-
-services.AddMongoDB<PortfolioContext>(dbSettings.ConnString + "/" + dbSettings.DatabaseName);
 
 WebApplication app = builder.Build();
 

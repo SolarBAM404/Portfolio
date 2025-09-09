@@ -12,12 +12,32 @@
             <Paragraph>
                 Listed below is the projects that I have been a part of and conducted
             </Paragraph>
+            <ListGroup>
+                @foreach (var category in _groupedProjects)
+                {
+                    <ListGroupItem>
+                        <a href="#@category.Key">@category.Key (@category.Value.Count)</a>
+                    </ListGroupItem>
+                }
+            </ListGroup>
         </Column>
+        
+        @foreach (var category in _groupedProjects)
+        {
+            <Column ColumnSize="ColumnSize.Is12">
+                <Heading Size="HeadingSize.Is4" Class="mt-4">@category.Key</Heading>
+            </Column>
+            @foreach (PortfolioProject project in category.Value)
+            {
+                <Column ColumnSize="ColumnSize.Is4" Class="mb-4">
+                    <PortfolioCollectionCard Project="project" />
+                </Column>
+            }
+        }
         
         @foreach (PortfolioProject project in _projects)
         {
             <Column ColumnSize="ColumnSize.Is3" Style="margin-bottom: 2rem">
-                <PortfolioCollectionCard Project="project" />
             </Column>
         }
         
@@ -28,10 +48,20 @@
 @code {
 
     private List<PortfolioProject> _projects;
+    private Dictionary<string?, List<PortfolioProject>> _groupedProjects;
     
     protected override void OnInitialized()
     {
         _projects = portfolioContext.PortfolioProjects.ToList();
+        GroupProjectsByCategory();
+    }
+
+    private void GroupProjectsByCategory()
+    {
+        _groupedProjects = _projects
+            .OrderBy(p => p.Title)
+            .GroupBy(p => p.Category)
+            .ToDictionary(g => g.Key, g => g.ToList());
     }
 
 }

@@ -6,6 +6,8 @@
 @rendermode InteractiveServer
 @inject PortfolioContext PortfolioContext
 
+<PageTitle>@(Project?.Title ?? "Project Details")</PageTitle>
+
 <Container>
     
     <Heading Size="HeadingSize.Is1" TextAlignment="TextAlignment.Center" Margin="Margin.Is2">@Project?.Title</Heading>

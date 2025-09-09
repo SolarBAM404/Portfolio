@@ -1,6 +1,23 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)"/>
-        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
-    </Found>
-</Router>
+﻿<ThemeProvider Theme="theme">
+    <Router AppAssembly="typeof(Program).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)"/>
+            <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+        </Found>
+    </Router>
+</ThemeProvider>
+
+@code {
+
+    private Theme theme = new Theme
+    {
+        ColorOptions = new ThemeColorOptions
+        {
+            Primary = "#3b4cbf",
+            Secondary = "#4577a2"
+        }
+    };
+
+    // https://colorkit.co/color-palette-generator/3b4cbf-3d5cb6-406aac-4577a2-212044/
+
+}

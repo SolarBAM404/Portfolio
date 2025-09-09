@@ -11,7 +11,7 @@
     <CardBody>
         <Heading Size="HeadingSize.Is3">@Project.Title</Heading>
         <Paragraph>@Project.Summary</Paragraph>
-        @if (Project.ProjectUrl is not null)
+        @if (!string.IsNullOrEmpty(Project.ProjectUrl))
         {
             <Button Color="Color.Primary" Type="ButtonType.Link" To="@Project.ProjectUrl" Target="Target.Blank" Class="mx-2">View Project</Button>
         }

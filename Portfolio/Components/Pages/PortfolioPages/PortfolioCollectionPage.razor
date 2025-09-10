@@ -14,20 +14,35 @@
             <Paragraph>
                 Listed below is the projects that I have been a part of and conducted
             </Paragraph>
-            <ListGroup>
-                @foreach (var category in _groupedProjects)
-                {
-                    <ListGroupItem>
-                        <a href="#@category.Key">@category.Key (@category.Value.Count)</a>
-                    </ListGroupItem>
-                }
-            </ListGroup>
+                
+            <Divider/>
+            
+                <div class="d-flex justify-content-center">
+                    
+                    @foreach (KeyValuePair<string?, List<PortfolioProject>> category in _groupedProjects)
+                    {
+                        <Button Color="Color.Dark" Type="ButtonType.Link" Class="mx-2" To="@("/portfolio#" + category.Key)">
+                            @category.Key (@category.Value.Count)
+                        </Button>
+                    }
+                </div>
+                
+            <Divider/>
         </Column>
+        
+        @{
+            int index = 0;
+        }
         
         @foreach (var category in _groupedProjects)
         {
+            @if (index > 0)
+            {
+                <Divider/>
+            }
+            
             <Column ColumnSize="ColumnSize.Is12">
-                <Heading Size="HeadingSize.Is4" Class="mt-4">@category.Key</Heading>
+                <Heading Size="HeadingSize.Is3" Class="mt-4" ElementId="@category.Key">@category.Key</Heading>
             </Column>
             @foreach (PortfolioProject project in category.Value)
             {
@@ -35,14 +50,10 @@
                     <PortfolioCollectionCard Project="project" />
                 </Column>
             }
+
+            index++;
         }
-        
-        @foreach (PortfolioProject project in _projects)
-        {
-            <Column ColumnSize="ColumnSize.Is3" Style="margin-bottom: 2rem">
-            </Column>
-        }
-        
+        <div class="mb-5"></div>
     </Row>
 </Container>
 

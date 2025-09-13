@@ -52,7 +52,7 @@
                         <CarouselSlide Name="@slideIndex.ToString()">
                             @if (content.Mode == MediaMode.Video )
                             {
-                                <Video Source="@content.Url" AutoPlay Loop Style="height: 40rem; max-width: 100vw"/>
+                                <Video Source="@content.Url" AutoPlay Loop Style="height: 40rem; max-width: 100vw" Muted="true"/>
                             }
                             else if (content.Mode == MediaMode.Image)
                             {
@@ -67,6 +67,54 @@
             <Button Type="ButtonType.Link" Color="Color.Primary" Width="Width.Auto" Style="margin-top: 1rem" To="/portfolio">View More....</Button>
         </Column>
         
+    </Row>
+    
+    <Row>
+        <Column>
+            <Heading Size="HeadingSize.Is3" Class="mb-4">Certificates & Education</Heading>
+            
+            <div id="education">
+                <Heading Size="HeadingSize.Is4" Class="mb-3">Education</Heading>
+                <ul class="curved-list">
+                    <li>
+                        <strong>Bachelor of Science (Hons) in Computer Science</strong> - University of Derby (2022 - 2025)
+                        <ul class="sublist">
+                            <li>Graduated with Second Class First Division</li>
+                            <li>Relevant Coursework: Software Development, Web Development, Database Management,
+                                Data Structures and Algorithms, Computer Networks, Operating Systems</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>BTech in Photography</strong> - Burton and South Derbyshire College (2019 - 2021)
+                        <ul class="sublist">
+                            <li>Graduated with Distinction</li>
+                            <li>Relevant Coursework: Digital Photography, Studio Lighting, Photo Editing, Visual
+                                Storytelling, Portfolio Development
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>GCSEs</strong> - Granville Academy (2014 - 2019)
+                        <ul class="sublist">
+                            <li>9 GCSEs including Mathematics (Grade 8), English Language (Grade 5), Triple Science
+                                (Grades 7, 6, 5) and Computer Science (Grade 6)
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="cetificates">
+                <Heading Size="HeadingSize.Is4" Class="mb-3">Certificates</Heading>
+                <ul>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+            
+            
+        </Column>
     </Row>
     
     <Row class="my-5" id="skills">

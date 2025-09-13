@@ -1,0 +1,82 @@
+.curved-list {
+    position: relative;
+    padding-left: 40px;
+    padding-bottom: 1rem;
+    list-style: none;
+}
+
+/* Main vertical line */
+.curved-list::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #ccc;
+    z-index: 0;
+}
+
+/* Top-level list items */
+.curved-list > li {
+    position: relative;
+    margin-bottom: 40px;
+    z-index: 0;
+}
+
+/* Sublist: override main line and draw new one */
+.sublist {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 10px;
+    list-style: none;
+    z-index: 1;
+}
+
+/* Sublist vertical line */
+.sublist::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 2px;
+    height: 100%;
+    background: #ccc;
+}
+
+.sublist > li {
+    position: relative;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.sublist li:first-child {
+    margin-top: 20px
+}
+
+/* Curve INTO sublist */
+.sublist li:first-child::before {
+    content: "";
+    position: absolute;
+    top: -28px;
+    left: -62px;
+    width: 50px;
+    height: 40px;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0 0 0 40px;
+}
+
+/* Curve OUT from sublist */
+.sublist li:last-child::after {
+    content: "";
+    position: absolute;
+    bottom: -48px;
+    left: -62px;
+    width: 50px;
+    height: 40px;
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-radius: 40px 0 0 0;
+}
